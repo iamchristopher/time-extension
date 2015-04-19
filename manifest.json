@@ -1,0 +1,30 @@
+{
+  "name": "Ourcane Time Tracking Assistant",
+  "version": "0.0.1",
+  "manifest_version": 2,
+  "description": "This extension was created with the awesome extensionizr.com",
+  "homepage_url": "http://www.arcane.ws",
+  "icons": {
+    "16": "source/icons/icon16.png",
+    "48": "source/icons/icon48.png",
+    "128": "source/icons/icon128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "source/background.js"
+    ],
+    "persistent": true
+  },
+  "options_page": "source/options_custom/index.html",
+  "browser_action": {
+    "default_icon": "source/icons/icon19.png",
+    "default_title": "browser action demo",
+    "default_popup": "source/browser_action/view/index.html"
+  },
+  "permissions": [
+    "idle",
+    "notifications",
+    "tabs"
+  ]
+}

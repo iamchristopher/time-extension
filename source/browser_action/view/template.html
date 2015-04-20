@@ -2,7 +2,7 @@
     <div class="container">
         <div class="row">
             <div class="col-xs-7">
-                Current: <a href="#">{{active_task.name}}</a><br>
+                Task: <a href="#">{{active_task.name}}</a><br>
                 Time: <strong>{{active_task.duration | duration}}</strong>
             </div>
             <div class="col-xs-5">
@@ -16,7 +16,7 @@
 
 <footer class="container">
     <nav class="navbar navbar-default navbar-fixed-bottom row">
-        <p class="col-xs-7">Total: {{0 | duration}}</p>
+        <p class="col-xs-7">Total: {{total_task_time | duration}}</p>
         <div class="col-xs-5">
             <button class="btn btn-success pull-right" ui-sref="app.add">Add Task</button>
         </div>

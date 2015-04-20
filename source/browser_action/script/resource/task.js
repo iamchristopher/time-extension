@@ -28,10 +28,19 @@ time_tracker.factory('task_service', function($resource, $interval, $filter) {
     }
 
     service.getActiveTask = function() {
-        console.log('test')
         return $filter('filter')(_tasks, {
             active: true
         })[0];
+    }
+
+    service.getTotalTaskTime = function() {
+        var time = 0;
+
+        _tasks.filter(function(task) {
+            time += task.duration;
+        });
+
+        return time;
     }
 
     function incrementTaskDuration(id) {

@@ -20,6 +20,7 @@ time_tracker.controller('add_controller', function($scope, $rootScope, task_serv
     function addTask(data) {
         task_service.addTask(data);
         $scope.updateActiveTask();
+        $scope.updateTotalTaskTime();
     }
 
 });

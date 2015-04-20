@@ -19,12 +19,19 @@ time_tracker.factory('task_service', function($resource, $interval, $filter) {
 
     service.setTaskAsActive = function(id) {
         var task = getTaskByID(id),
-            active_task = getActiveTask();
+            active_task = this.getActiveTask();
 
         active_task.active = false;
 
         startTracking(id);
         task.active = true;
+    }
+
+    service.getActiveTask = function() {
+        console.log('test')
+        return $filter('filter')(_tasks, {
+            active: true
+        })[0];
     }
 
     function incrementTaskDuration(id) {
@@ -35,12 +42,6 @@ time_tracker.factory('task_service', function($resource, $interval, $filter) {
     function getTaskByID(id) {
         return $filter('filter')(_tasks, {
             id: id
-        })[0];
-    }
-
-    function getActiveTask() {
-        return $filter('filter')(_tasks, {
-            active: true
         })[0];
     }
 

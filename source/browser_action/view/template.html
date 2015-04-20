@@ -2,8 +2,8 @@
     <div class="container">
         <div class="row">
             <div class="col-xs-7">
-                Current: <a href="#">Making time tracking app</a><br>
-                Time: <strong>{{0 | duration}}</strong>
+                Current: <a href="#">{{active_task.name}}</a><br>
+                Time: <strong>{{active_task.duration | duration}}</strong>
             </div>
             <div class="col-xs-5">
                 <button class="btn btn-primary pull-right">Start Tracking</button>

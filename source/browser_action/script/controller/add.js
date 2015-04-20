@@ -8,7 +8,7 @@ time_tracker.controller('add_controller', function($scope, task_service) {
         var task_data = {
             name: $scope.new_task.name,
             notes: $scope.new_task.notes,
-            duration: 1200
+            duration: 0
         }
 
         addTask(task_data);

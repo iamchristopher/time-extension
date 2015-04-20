@@ -10,11 +10,41 @@ time_tracker.factory('task_service', function($resource, $interval, $filter) {
 
     service.addTask = function(data) {
         data.id = _tasks.length + 1;
+        data.active = true;
+
         _tasks.push(data);
-        this.startTracking(data.id);
+
+        this.setTaskAsActive(data.id);
     }
 
-    service.startTracking = function(id) {
+    service.setTaskAsActive = function(id) {
+        var task = getTaskByID(id),
+            active_task = getActiveTask();
+
+        active_task.active = false;
+
+        startTracking(id);
+        task.active = true;
+    }
+
+    function incrementTaskDuration(id) {
+        var task = getTaskByID(id);
+        task.duration++;
+    }
+
+    function getTaskByID(id) {
+        return $filter('filter')(_tasks, {
+            id: id
+        })[0];
+    }
+
+    function getActiveTask() {
+        return $filter('filter')(_tasks, {
+            active: true
+        })[0];
+    }
+
+    function startTracking(id) {
         if (_timer) {
             $interval.cancel(_timer);
             _timer = null;
@@ -25,12 +55,7 @@ time_tracker.factory('task_service', function($resource, $interval, $filter) {
         }, 1000)
     }
 
-    service.stopTracking = function() {
-    }
-
-    function incrementTaskDuration(id) {
-        var task = $filter('filter')(_tasks, {id: id})[0];
-        task.duration++;
+    function stopTracking(id) {
     }
 
     return service;

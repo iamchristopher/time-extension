@@ -1,6 +1,6 @@
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container">
-        <div class="row">
+        <div class="row" ng-if="active_task">
             <div class="col-xs-7">
                 Task: <a href="#">{{active_task.name}}</a><br>
                 Time: <strong>{{active_task.duration | duration}}</strong>

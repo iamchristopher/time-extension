@@ -20,7 +20,7 @@
   "browser_action": {
     "default_icon": "source/icons/icon19.png",
     "default_title": "browser action demo",
-    "default_popup": "source/browser_action/view/index.html"
+    "default_popup": "source/browser_action/index.html"
   },
   "permissions": [
     "idle",

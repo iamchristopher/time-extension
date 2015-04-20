@@ -1,0 +1,33 @@
+<div ng-if="tasks.length == 0">
+    You have not added any tasks yet. <a ui-sref="app.add">Add one now</a>.
+</div>
+
+<table class="table table-hover table-striped" ng-if="tasks.length > 0">
+    <thead>
+        <tr>
+            <td></td>
+            <td>Task</td>
+            <td>Elapsed</td>
+            <td>Actions</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="task in tasks">
+            <td>
+                <a href="#">
+                    <span class="glyphicon glyphicon-time" title="Track this task"></span>
+                </a>
+            </td>
+            <td width="100%"><a href="#">{{task.name}}</a></td>
+            <td>{{task.elapsed_time}}</td>
+            <td>
+                <a href="#">
+                    <span class="glyphicon glyphicon-edit" title="Edit this task"></span>
+                </a>
+                <a href="#">
+                    <span class="glyphicon glyphicon-trash" title="Remove this task"></span>
+                </a>
+            </td>
+        </tr>
+    </tbody>
+</table>

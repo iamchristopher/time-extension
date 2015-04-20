@@ -1,0 +1,24 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-7">
+                Current: <a href="#">Making time tracking app</a><br>
+                Time: <strong>--:--:--</strong>
+            </div>
+            <div class="col-xs-5">
+                <button class="btn btn-primary pull-right">Start Tracking</button>
+            </div>                
+        </div>
+    </div>
+</nav>
+
+<ui-view></ui-view>
+
+<footer class="container">
+    <nav class="navbar navbar-default navbar-fixed-bottom row">
+        <p class="col-xs-7">Total: --:--:--</p>
+        <div class="col-xs-5">
+            <button class="btn btn-success pull-right" ui-sref="app.add">Add Task</button>
+        </div>
+    </nav>
+</footer>

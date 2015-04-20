@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-xs-7">
                 Current: <a href="#">Making time tracking app</a><br>
-                Time: <strong>--:--:--</strong>
+                Time: <strong>{{0 | duration}}</strong>
             </div>
             <div class="col-xs-5">
                 <button class="btn btn-primary pull-right">Start Tracking</button>
@@ -16,7 +16,7 @@
 
 <footer class="container">
     <nav class="navbar navbar-default navbar-fixed-bottom row">
-        <p class="col-xs-7">Total: --:--:--</p>
+        <p class="col-xs-7">Total: {{0 | duration}}</p>
         <div class="col-xs-5">
             <button class="btn btn-success pull-right" ui-sref="app.add">Add Task</button>
         </div>

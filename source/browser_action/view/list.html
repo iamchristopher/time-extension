@@ -15,7 +15,11 @@
         <tr ng-repeat="task in tasks">
             <td>
                 <a href="#">
-                    <span class="glyphicon glyphicon-time" title="Track this task"></span>
+                    <span
+                        class="glyphicon glyphicon-time"
+                        title="Track this task"
+                        ng-click="trackTask(task.id)"
+                        ></span>
                 </a>
             </td>
             <td width="100%"><a href="#">{{task.name}}</a></td>

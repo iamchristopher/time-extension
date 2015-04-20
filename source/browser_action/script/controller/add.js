@@ -1,4 +1,4 @@
-time_tracker.controller('add_controller', function($scope, $rootScope, task_service) {
+time_tracker.controller('add_controller', function($scope, $rootScope, $state, task_service) {
 
     $scope.processTask = function() {
         if ($scope.new_task.$invalid) {
@@ -21,6 +21,7 @@ time_tracker.controller('add_controller', function($scope, $rootScope, task_serv
         task_service.addTask(data);
         $scope.updateActiveTask();
         $scope.updateTotalTaskTime();
+        $state.go('app.list');
     }
 
 });

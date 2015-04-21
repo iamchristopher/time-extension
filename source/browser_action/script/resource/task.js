@@ -12,17 +12,25 @@ time_tracker.factory('task_service', function($resource, $interval, $filter, $in
     }
 
     service.addTask = function(data) {
-        data.active = true;
+        if (!data.hasOwnProperty('active')) {
+            data.active = false;
+        }
+
+        if (!data.hasOwnProperty('duration')) {
+            data.duration = 0;
+        }
 
         $indexedDB.openStore('task', function(store) {
             store
                 .insert(data)
                 .then(function(e) {
-                    console.log('INSERT:', e)
+                    var insert_id = e[0];
+                    console.log('INSERT:', insert_id);
+
+                    service.setTaskAsActive(insert_id);
                 });
         });
 
-        this.setTaskAsActive(data.id);
     }
 
     service.setTaskAsActive = function(id) {

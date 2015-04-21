@@ -1,18 +1,26 @@
-time_tracker.factory('task_service', function($resource, $interval, $filter) {
+time_tracker.factory('task_service', function($resource, $interval, $filter, $indexedDB) {
 
     var service = {},
         _tasks = [],
         _timer = null;
 
     service.getTasks = function() {
-        return _tasks.reverse();
+        return $indexedDB
+            .openStore('task', function(store) {
+                return store.getAll()
+            });
     }
 
     service.addTask = function(data) {
-        data.id = _tasks.length + 1;
         data.active = true;
 
-        _tasks.push(data);
+        $indexedDB.openStore('task', function(store) {
+            store
+                .insert(data)
+                .then(function(e) {
+                    console.log('INSERT:', e)
+                });
+        });
 
         this.setTaskAsActive(data.id);
     }

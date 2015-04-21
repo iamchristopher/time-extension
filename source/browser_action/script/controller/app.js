@@ -11,7 +11,11 @@ time_tracker.controller('app_controller', function($scope, $rootScope, $interval
     }
 
     $scope.init = function() {
-        $rootScope.tasks = task_service.getTasks();
+        task_service
+            .getTasks()
+                .then(function(tasks) {
+                    $rootScope.tasks = tasks;
+                });
     }();
 
 });

@@ -1,9 +1,10 @@
 var time_tracker = angular.module('time_tracker', [
     'ngResource',
-    'ui.router'
+    'ui.router',
+    'indexedDB'
 ]);
 
-time_tracker.config(function($stateProvider, $urlRouterProvider) {
+time_tracker.config(function($stateProvider, $urlRouterProvider, $indexedDBProvider) {
 
     $urlRouterProvider
         .otherwise('/app/add');
@@ -25,5 +26,21 @@ time_tracker.config(function($stateProvider, $urlRouterProvider) {
                 url: '/list',
                 templateUrl: 'view/list.html'
             });
+
+    $indexedDBProvider
+        .connection('ourtime')
+        .upgradeDatabase(1, function(event, database, transaction) {
+
+            // Create data store
+            var data_store = database.createObjectStore('task', {
+                keyPath: 'id',
+                autoIncrement: true
+            });
+
+            // Add indexes
+            data_store.createIndex('active_index', 'active', {
+                unique: false
+            });
+        });
 
 });

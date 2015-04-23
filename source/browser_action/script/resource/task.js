@@ -23,6 +23,12 @@ time_tracker.factory('task_service', function($resource, $interval, $filter, $in
         });
     }
 
+    service.removeByID = function(id) {
+        return $indexedDB.openStore('task', function(store) {
+            return store.delete(id);
+        })
+    }
+
     service.addTask = function(data) {
         if (!data.hasOwnProperty('duration')) {
             data.duration = 0;

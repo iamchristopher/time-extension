@@ -7,7 +7,7 @@ var time_tracker = angular.module('time_tracker', [
 time_tracker.config(function($stateProvider, $urlRouterProvider, $indexedDBProvider) {
 
     $urlRouterProvider
-        .otherwise('/app/add');
+        .otherwise('/app/list');
 
     $stateProvider
         .state('app', {

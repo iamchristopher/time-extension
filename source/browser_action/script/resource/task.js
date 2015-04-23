@@ -75,10 +75,12 @@ time_tracker.factory('task_service', function($resource, $interval, $filter, $in
         });
     }
 
-    service.getActiveTask = function() {
-        return $filter('filter')(_tasks, {
-            active: true
-        })[0];
+    service.getActive = function() {
+        return $indexedDB.openStore('task', function(store) {
+            return store.findWhere(
+                store.query().$index('active').$eq(1)
+            );
+        });
     }
 
     service.getTotalTaskTime = function() {

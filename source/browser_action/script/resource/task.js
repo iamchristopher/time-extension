@@ -11,11 +11,19 @@ time_tracker.factory('task_service', function($resource, $interval, $filter, $in
             });
     }
 
-    service.addTask = function(data) {
-        if (!data.hasOwnProperty('active')) {
-            data.active = false;
-        }
+    service.getTaskByID = function(id) {
+        return $indexedDB.openStore('task', function(store) {
+            return store.find(id);
+        });
+    }
 
+    service.getTaskByID = function(id) {
+        return $indexedDB.openStore('task', function(store) {
+            return store.find(id);
+        });
+    }
+
+    service.addTask = function(data) {
         if (!data.hasOwnProperty('duration')) {
             data.duration = 0;
         }
@@ -30,17 +38,36 @@ time_tracker.factory('task_service', function($resource, $interval, $filter, $in
                     service.setTaskAsActive(insert_id);
                 });
         });
-
     }
 
     service.setTaskAsActive = function(id) {
-        var task = getTaskByID(id),
-            active_task = this.getActiveTask();
+        $indexedDB.openStore('task', function(store) {
 
-        active_task.active = false;
+            // Get any tasks that currently have the active flag
+            // so we can disable them
+            store.findWhere(
+                store.query().$index('active').$eq(1)
+            )
+                .then(function(tasks) {
+                    if (tasks.length === 0) {
+                        return;
+                    }
 
-        startTracking(id);
-        task.active = true;
+                    tasks.forEach(function(task) {
+                        task.active = 0;
+                    });
+
+                    store.upsert(tasks);
+                });
+
+            // Set the new task as active
+            store.find(id)
+                .then(function(task) {
+                    task.active = 1;
+                    store.upsert(task);
+                });
+
+        });
     }
 
     service.getActiveTask = function() {
@@ -62,12 +89,6 @@ time_tracker.factory('task_service', function($resource, $interval, $filter, $in
     function incrementTaskDuration(id) {
         var task = getTaskByID(id);
         task.duration++;
-    }
-
-    function getTaskByID(id) {
-        return $filter('filter')(_tasks, {
-            id: id
-        })[0];
     }
 
     function startTracking(id) {

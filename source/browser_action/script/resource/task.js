@@ -33,7 +33,6 @@ time_tracker.factory('task_service', function($resource, $interval, $filter, $in
                 .insert(data)
                 .then(function(e) {
                     var insert_id = e[0];
-                    console.log('INSERT:', insert_id);
 
                     service.setTaskAsActive(insert_id);
                 });

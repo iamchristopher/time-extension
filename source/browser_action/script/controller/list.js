@@ -6,6 +6,15 @@ time_tracker.controller('list_controller', function($scope, task_service) {
     }
     
     $scope.init = function() {
+        refreshTaskList();
     }();
+
+    function refreshTaskList() {
+        task_service
+            .getTasks()
+                .then(function(tasks) {
+                    $scope.tasks = tasks;
+                });
+    }
 
 });

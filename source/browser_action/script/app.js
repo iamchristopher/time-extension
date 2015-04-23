@@ -38,7 +38,7 @@ time_tracker.config(function($stateProvider, $urlRouterProvider, $indexedDBProvi
             });
 
             // Add indexes
-            data_store.createIndex('active_index', 'active', {
+            data_store.createIndex('active', 'active', {
                 unique: false
             });
         });

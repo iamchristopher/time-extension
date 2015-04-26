@@ -1,6 +1,6 @@
 time_tracker.controller('app_controller', function($scope, $rootScope, $interval, task_service) {
     
-    $scope.updateActiveTask = function() {
+    $rootScope.updateActiveTask = function() {
         task_service.getActive()
             .then(function(active_task) {
                 $scope.active_task = active_task[0];

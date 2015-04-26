@@ -1,4 +1,4 @@
-time_tracker.controller('list_controller', function($scope, task_service) {
+time_tracker.controller('list_controller', function($scope, $rootScope, task_service) {
 
     $scope.trackTask = function(id) {
         task_service.setTaskAsActive(id);
